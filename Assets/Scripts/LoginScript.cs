@@ -4,6 +4,8 @@ using SimpleJSON;
 
 public class LoginScript : MonoBehaviour {
 
+    public GameObject setNamePanel, menuButtonsPanel;
+
     private bool newProfile = true;
     private string url = "http://noblehousegames.x10host.com/tictactoe/checkprofile.php";
 	
@@ -19,7 +21,10 @@ public class LoginScript : MonoBehaviour {
             Debug.Log("id found: " + playerID);
         }
         else
+        {
             Debug.Log("id not found");
+            newProfile = true;
+        }
 
         WWWForm form = new WWWForm();
         form.AddField("playerID", playerID);
@@ -49,7 +54,9 @@ public class LoginScript : MonoBehaviour {
                 PlayerPrefs.SetInt("losses", 0);
                 PlayerPrefs.SetInt("draws", 0);
 
-                //TODO: show create name window
+                //show create name window
+                menuButtonsPanel.SetActive(false);
+                setNamePanel.SetActive(true);
             }
             else
             {
