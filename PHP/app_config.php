@@ -1,7 +1,7 @@
 <?php
-	define('DB_NAME', 'noblehou_GameDB');
-	define('DB_USER', 'noblehou_tictact');
-	define('DB_PASSWORD', 'q8p94bvy38qpn4');
+	define('DB_NAME', '***********');
+	define('DB_USER', '***********');
+	define('DB_PASSWORD', '***********');
 	define('DB_HOST', 'localhost');
 
 	function connect() {
