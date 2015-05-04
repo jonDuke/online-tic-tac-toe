@@ -40,9 +40,8 @@ public class SetName : MonoBehaviour {
         {
             Debug.Log(www.text);
 
-            //show buttons and hide this screen
-            menuButtonsPanel.SetActive(true);
-            gameObject.SetActive(false);
+            //name is set, continue to menu
+            Application.LoadLevel("Main Menu");
         }
         else
             Debug.Log("WWW Error: " + www.error);
