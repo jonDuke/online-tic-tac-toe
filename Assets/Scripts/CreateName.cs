@@ -2,9 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class SetName : MonoBehaviour {
-
-    public GameObject menuButtonsPanel;
+public class CreateName : MonoBehaviour {
 
     private string url = "http://noblehousegames.x10host.com/tictactoe/setname.php";
 
