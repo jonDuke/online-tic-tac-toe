@@ -14,7 +14,6 @@ public class PrefsDelete : MonoBehaviour {
         {
             DrawDefaultInspector();
 
-            PrefsDelete script = target as PrefsDelete;
             if (GUILayout.Button("CLEAR PLAYER PREFS"))
                 PlayerPrefs.DeleteAll();
         }
