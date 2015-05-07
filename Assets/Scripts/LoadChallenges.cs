@@ -7,6 +7,7 @@ public class LoadChallenges : MonoBehaviour {
     public GameObject contentPanel;
     public GameObject displayPrefab;
 
+    private int offset = 0;
     private string url = "http://noblehousegames.x10host.com/tictactoe/getchallenges.php";
 
 	void Start () 
@@ -35,10 +36,19 @@ public class LoadChallenges : MonoBehaviour {
         }
     }
 
-    public void loadChallenges(int offset = 0)
+    void clearDisplay()
     {
+        ChallengeDisplay[] oldDisplays = contentPanel.GetComponentsInChildren<ChallengeDisplay>();
+        foreach (ChallengeDisplay display in oldDisplays)
+            Destroy(display.gameObject);
+    }
+
+    public void loadChallenges()
+    {
+        Debug.Log("loading from offset " + offset);
         WWWForm form = new WWWForm();
-        form.AddField("offest", offset);
+        form.AddField("offset", offset);
+        offset += 10; //next time this is called, the game will load the next set
 
         WWW www = new WWW(url, form);
         StartCoroutine(CallPHP(www));
@@ -52,8 +62,17 @@ public class LoadChallenges : MonoBehaviour {
         if (www.error == null)
         {
             Debug.Log(www.text);
-
-            displayChallenges(www.text);
+            if (www.text.Equals("ERROR: no data found"))
+            {
+                Debug.Log("no more entries! returning to front of list");
+                offset = 0;
+                loadChallenges(); //reload the first group, the display loops around
+            }
+            else
+            {
+                clearDisplay();
+                displayChallenges(www.text);
+            }
         }
         else
             Debug.Log("WWW Error: " + www.error);

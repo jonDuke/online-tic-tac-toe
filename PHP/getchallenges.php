@@ -3,7 +3,7 @@
 	$DB_link = connect();
 
 	$offset = $_POST['offset']; //number to start at
-	$offset = 0;
+	
 	$query = "SELECT playerid FROM Challenges ORDER BY datecreated ASC LIMIT $offset, 10";
 	$result = mysqli_query($DB_link, $query) or die('ERROR: ' . mysqli_error($DB_link));
 
