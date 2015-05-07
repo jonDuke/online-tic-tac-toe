@@ -22,9 +22,7 @@ public class CreateChallenge : MonoBehaviour {
     public void PressButton()
     {
         if (challengeActive)
-        {
-            //delete challenge
-        }
+            deleteChallenge();
         else
             createChallenge();
     }
@@ -71,6 +69,31 @@ public class CreateChallenge : MonoBehaviour {
         {
             Debug.Log(www.text);
             challengeActive = true;
+            buttonText.text = "Delete Challenge";
+        }
+        else
+            Debug.Log("WWW Error: " + www.error);
+    }
+
+    void deleteChallenge()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id", PlayerPrefs.GetInt("playerid"));
+
+        WWW www = new WWW(url + "deletechallenge.php", form);
+        StartCoroutine(CallDelete(www));
+    }
+
+    IEnumerator CallDelete(WWW www)
+    {
+        yield return www;
+
+        // check for errors
+        if (www.error == null)
+        {
+            Debug.Log(www.text);
+            challengeActive = false;
+            buttonText.text = "Create Challenge";
         }
         else
             Debug.Log("WWW Error: " + www.error);
