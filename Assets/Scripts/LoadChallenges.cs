@@ -19,13 +19,19 @@ public class LoadChallenges : MonoBehaviour {
         var node = JSON.Parse(jsondata);
 
         int numChallenges = node[0].AsInt;
+        int myID = PlayerPrefs.GetInt("playerid");
 
         for (int i = 1; i <= numChallenges; i++)
         {
-            GameObject newDisplay = Instantiate<GameObject>(displayPrefab);
-            newDisplay.GetComponent<ChallengeDisplay>().SetDisplay(node[i]["name"], node[i]["wins"].AsInt, node[i]["losses"].AsInt, node[i]["draws"].AsInt);
-            newDisplay.transform.SetParent(contentPanel.transform);
-            newDisplay.transform.localScale = new Vector3(1, 1, 1); //was getting set to 2.5 for some reason.  no idea why...
+            if (node[i]["id"].AsInt != myID) //don't show the player's own challenge
+            {
+                GameObject newDisplay = Instantiate<GameObject>(displayPrefab);
+                ChallengeDisplay display = newDisplay.GetComponent<ChallengeDisplay>();
+                display.SetDisplay(node[i]["name"], node[i]["wins"].AsInt, node[i]["losses"].AsInt, node[i]["draws"].AsInt);
+                display.playerid = node[i]["id"].AsInt;
+                newDisplay.transform.SetParent(contentPanel.transform);
+                newDisplay.transform.localScale = new Vector3(1, 1, 1); //was getting set to 2.5 for some reason.  no idea why...
+            }
         }
     }
 

@@ -20,7 +20,7 @@
 		$playerdata = mysqli_query($DB_link, $query) or die('ERROR: ' . mysqli_error($DB_link));
 
 		$playerdata = mysqli_fetch_assoc($playerdata);
-		$data[$i] = array('name' => $playerdata['name'], 'wins' => $playerdata['wins'], 'losses' => $playerdata['losses'], 'draws' => $playerdata['draws']);
+		$data[$i] = array('id' => $row['playerid'], 'name' => $playerdata['name'], 'wins' => $playerdata['wins'], 'losses' => $playerdata['losses'], 'draws' => $playerdata['draws']);
 	}
 
 	echo json_encode($data);
