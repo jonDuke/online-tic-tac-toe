@@ -5,6 +5,7 @@ using SimpleJSON;
 public class LoadGame : MonoBehaviour {
 
     public GameInfoDisplay infoDisplay;
+    public GameGrid gameGrid;
 
 	private string url = "http://noblehousegames.x10host.com/tictactoe/loadgame.php";
 
@@ -33,6 +34,8 @@ public class LoadGame : MonoBehaviour {
 
             infoDisplay.SetDisplay(node["othername"], node["turn"].AsBool);
             StaticMemory.playerType = node["playertype"].AsInt;
+
+            gameGrid.DisplayGame(node["boardstate"]);
         }
         else
             Debug.Log("WWW Error: " + www.error);

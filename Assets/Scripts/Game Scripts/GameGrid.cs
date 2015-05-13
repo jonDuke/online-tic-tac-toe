@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SimpleJSON;
 
 public class GameGrid : MonoBehaviour {
 
@@ -22,5 +23,20 @@ public class GameGrid : MonoBehaviour {
                 tile.ClearTile();
 
         currentMove = currentTile;
+    }
+
+    public void DisplayGame(string boardState)
+    {
+        var node = JSON.Parse(boardState);
+
+        for (int i = 0; i < 9; i++)
+        {
+            if (node[i].AsInt == 1)
+                tiles[i].SetX();
+            else if (node[i].AsInt == 2)
+                tiles[i].SetO();
+            else
+                tiles[i].ClearTile();
+        }
     }
 }

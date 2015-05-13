@@ -34,4 +34,28 @@ public class GameTile : MonoBehaviour {
         newColor.a = 0;
         graphic.color = newColor;
     }
+
+    public void SetX()
+    {
+        set = true;
+        Image graphic = GetComponent<Image>();
+        
+        graphic.sprite = xPic;
+
+        Color newColor = graphic.color;
+        newColor.a = 1;
+        graphic.color = newColor;
+    }
+
+    public void SetO()
+    {
+        set = true;
+        Image graphic = GetComponent<Image>();
+
+        graphic.sprite = oPic;
+
+        Color newColor = graphic.color;
+        newColor.a = 1;
+        graphic.color = newColor;
+    }
 }
