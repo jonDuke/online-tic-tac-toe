@@ -10,7 +10,8 @@ public class GameTile : MonoBehaviour {
 
     public void PressTile()
     {
-        if (set)
+        //if it's not your turn or if the space is already used, do nothing
+        if (!StaticMemory.yourTurn || set)
             return;
 
         Image graphic = GetComponent<Image>();

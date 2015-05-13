@@ -8,4 +8,6 @@ public class StaticMemory : MonoBehaviour {
 
     public static int currentGame; //gameid of the game selected, so we can load the correct one
     public static int playerType; //are you x (1) or o (0) for the current game?
+
+    public static bool yourTurn;
 }
