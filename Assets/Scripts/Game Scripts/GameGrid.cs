@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using SimpleJSON;
+using System;
 
 public class GameGrid : MonoBehaviour {
 
@@ -38,5 +38,23 @@ public class GameGrid : MonoBehaviour {
             else
                 tiles[i].ClearTile();
         }
+    }
+
+    public void confirmMove(string response)
+    {
+        int move = Convert.ToInt32(response);
+
+        //clear unset tiles, in case user pressed another before the response was recieved
+        foreach (GameTile tile in tiles)
+            if (!tile.set)
+                tile.ClearTile();
+
+        //set new tile
+        if (StaticMemory.playerType == 1)
+            tiles[move].SetX();
+        else
+            tiles[move].SetO();
+
+        currentMove = -1;
     }
 }

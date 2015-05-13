@@ -28,7 +28,7 @@
 		if($gameinfo['turn'] == 2)
 			$turn = true;
 
-		$playertype = 0;
+		$playertype = 2;
 		$otherPlayerID = $gameinfo['player1id'];
 	}
 

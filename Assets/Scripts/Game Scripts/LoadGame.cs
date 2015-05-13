@@ -34,7 +34,7 @@ public class LoadGame : MonoBehaviour {
 
             infoDisplay.SetDisplay(node["othername"], node["turn"].AsBool);
             StaticMemory.playerType = node["playertype"].AsInt;
-
+            StaticMemory.yourTurn = node["turn"].AsBool;
             gameGrid.DisplayGame(node["boardstate"]);
         }
         else
