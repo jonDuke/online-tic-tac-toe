@@ -24,6 +24,7 @@ public class LoadGameList : MonoBehaviour {
             GameObject newGame = Instantiate(displayPrefab);
             GameListDisplay display = newGame.GetComponent<GameListDisplay>();
             display.setDisplay(node[i]["player2name"], node[i]["turn"].AsBool);
+            display.gameID = node[i]["gameid"].AsInt;
 
             newGame.transform.SetParent(contentPanel.transform);
             newGame.transform.localScale = new Vector3(1, 1, 1); //transform gets set to 2.5 for some reason
