@@ -3,7 +3,7 @@
 	$DB_link = connect();
 
 	$id = $_POST['id'];
-	$id = 2;
+	
 	$query = "SELECT activegamecount, game1, game2, game3, game4, game5, game6, game7, game8, game9, game10 FROM Players WHERE playerid = $id";
 	$result = mysqli_query($DB_link, $query) or die('ERROR1: ' . mysqli_error($DB_link));
 
