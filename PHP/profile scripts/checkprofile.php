@@ -5,22 +5,16 @@
 	$DB_link = connect();
 
 	$playerID = $_POST['playerID'];
-
-	$query = "SELECT name FROM Players WHERE playerid = " . mysqli_escape_string($DB_link, $playerID);
+	
+	$query = "SELECT name FROM Players WHERE playerid = $playerID";
 	$result = mysqli_query($DB_link, $query) or die('ERROR1: ' . mysqli_error($DB_link));
 	
 	if (mysqli_num_rows($result) == 0) //create new player
 	{
-		$query = "SELECT playerid FROM Players ORDER BY playerid DESC";
+		$query = "INSERT INTO Players () VALUES ()";
 		$result = mysqli_query($DB_link, $query) or die('ERROR2: ' . mysqli_error($DB_link));
-		$row = mysqli_fetch_assoc($result);
 
-		$newid = $row['playerid'] + 1;
-
-		$query = "INSERT INTO Players (playerid) VALUES (" . $newid . ")";
-		$result = mysqli_query($DB_link, $query) or die('ERROR3: ' . mysqli_error($DB_link));
-
-		echo json_encode(array('id' => $newid));
+		echo json_encode(array('id' => mysqli_insert_id($DB_link)));
 	}
 	else
 	{
