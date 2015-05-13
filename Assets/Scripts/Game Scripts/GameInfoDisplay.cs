@@ -5,9 +5,9 @@ public class GameInfoDisplay : MonoBehaviour {
 
     public Text nameDisplay, turnDisplay;
 
-    public void SetDisplay(string name, int turn)
+    public void SetDisplay(string name, bool turn)
     {
         nameDisplay.text = name;
-        turnDisplay.text = "Turn: " + turn;
+        turnDisplay.text = "Turn: " + ((turn) ? "yours" : "theirs");
     }
 }
