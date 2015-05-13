@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 403f5fa29fc883b40a6689d65865c571
+timeCreated: 1431498289
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - xPix: {fileID: 2800000, guid: e6a3a7067c81c1a40b035b425a4087ee, type: 3}
+  - oPic: {fileID: 2800000, guid: 7d954fe26941b164fa71618ef4d99689, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

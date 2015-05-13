@@ -13,15 +13,26 @@
 
 	$gameinfo = mysqli_fetch_assoc($result);
 
-	//determine turn
+	//determine turn and player type
 	$turn = false;
-	if($gameinfo['player1id'] == $playerID && $gameinfo['turn'] == 1)
-		$turn = true;
-	else if($gameinfo['player2id'] == $playerID && $gameinfo['turn'] == 2)
-		$turn = true;
+	if($gameinfo['player1id'] == $playerID)
+	{
+		if($gameinfo['turn'] == 1)
+			$turn = true;
+
+		$playertype = 1;
+		$otherPlayerID = $gameinfo['player2id'];
+	}
+	else if($gameinfo['player2id'] == $playerID)
+	{
+		if($gameinfo['turn'] == 2)
+			$turn = true;
+
+		$playertype = 0;
+		$otherPlayerID = $gameinfo['player1id'];
+	}
 
 	//get other player info
-	$otherPlayerID = ($gameinfo['player1id'] == $playerID) ? $gameinfo['player2id'] : $gameinfo['player1id'];
 	$query = "SELECT name FROM Players WHERE playerid = $otherPlayerID";
 	$result = mysqli_query($DB_link, $query) or die('ERROR2: ' . mysqli_error($DB_link));
 
@@ -30,7 +41,7 @@
 
 	$playerinfo = mysqli_fetch_assoc($result);
 
-	//$data sent: [turn bool, opponent name, opponent id, boardstate]
-	$data = array('turn' => $turn, 'othername' => $playerinfo['name'], 'otherid' => $otherPlayerID, 'boardstate' => $gameinfo['boardstate']);
+	//$data sent: [turn bool, playertype, opponent name, opponent id, boardstate]
+	$data = array('turn' => $turn, 'playertype' => $playertype, 'othername' => $playerinfo['name'], 'otherid' => $otherPlayerID, 'boardstate' => $gameinfo['boardstate']);
 	echo json_encode($data);
 ?>

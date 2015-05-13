@@ -32,6 +32,7 @@ public class LoadGame : MonoBehaviour {
             var node = JSON.Parse(www.text);
 
             infoDisplay.SetDisplay(node["othername"], node["turn"].AsBool);
+            StaticMemory.playerType = node["playertype"].AsInt;
         }
         else
             Debug.Log("WWW Error: " + www.error);
