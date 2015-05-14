@@ -4,7 +4,7 @@
 
 	$playerID = $_POST['id'];
 	$otherID = $_POST['otherid'];
-	
+
 	$turn = rand(1, 2);
 
 	//create the game
@@ -15,6 +15,10 @@
 	//update player profiles
 	update_profile($playerID, $gameID, $DB_link);
 	update_profile($otherID, $gameID, $DB_link);
+
+	//remove challenge listing from database
+	$query = "DELETE FROM Challenges WHERE playerid = $otherID";
+	mysqli_query($DB_link, $query) or die('ERROR2: ' . mysqli_error($DB_link));
 
 	echo json_encode(array('newgame' => $gameID));
 
