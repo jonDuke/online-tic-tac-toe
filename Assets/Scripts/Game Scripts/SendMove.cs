@@ -26,6 +26,8 @@ public class SendMove : MonoBehaviour {
 
     public void sendMove()
     {
+        StaticMemory.lastMove = grid.currentMove;
+
         WWWForm form = new WWWForm();
         form.AddField("id", PlayerPrefs.GetInt("playerid"));
         form.AddField("game", StaticMemory.currentGame);
@@ -34,6 +36,8 @@ public class SendMove : MonoBehaviour {
 
         WWW www = new WWW(url, form);
         StartCoroutine(callSendMove(www));
+
+        grid.currentMove = -1;
     }
 
     IEnumerator callSendMove(WWW www)
