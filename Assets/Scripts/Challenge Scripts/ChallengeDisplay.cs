@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class ChallengeDisplay : MonoBehaviour {
 
@@ -40,7 +41,8 @@ public class ChallengeDisplay : MonoBehaviour {
         if (www.error == null)
         {
             Debug.Log(www.text);
-            Destroy(this.gameObject);
+            StaticMemory.currentGame = Convert.ToInt32(www.text);
+            Application.LoadLevel("Gameplay");
         }
         else
         {

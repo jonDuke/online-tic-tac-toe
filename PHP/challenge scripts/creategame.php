@@ -20,7 +20,7 @@
 	$query = "DELETE FROM Challenges WHERE playerid = $otherID";
 	mysqli_query($DB_link, $query) or die('ERROR2: ' . mysqli_error($DB_link));
 
-	echo json_encode(array('newgame' => $gameID));
+	echo $gameID;
 
 
 	function update_profile($id, $newGameID, $DB_link)
