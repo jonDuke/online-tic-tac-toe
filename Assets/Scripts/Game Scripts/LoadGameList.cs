@@ -19,6 +19,8 @@ public class LoadGameList : MonoBehaviour {
 
         int numGames = node[0].AsInt;
 
+        ArrayList activeGames = new ArrayList();
+        ArrayList inactiveGames = new ArrayList();
         for (int i = 1; i <= numGames; i++)
         {
             GameObject newGame = Instantiate(displayPrefab);
@@ -26,8 +28,21 @@ public class LoadGameList : MonoBehaviour {
             display.setDisplay(node[i]["player2name"], node[i]["turn"].AsBool);
             display.gameID = node[i]["gameid"].AsInt;
 
-            newGame.transform.SetParent(contentPanel.transform);
-            newGame.transform.localScale = new Vector3(1, 1, 1); //transform gets set to 2.5 for some reason
+            if (node[i]["turn"].AsBool)
+                activeGames.Add(newGame.transform);
+            else
+                inactiveGames.Add(newGame.transform);
+        }
+
+        foreach (Transform game in activeGames)
+        {
+            game.SetParent(contentPanel.transform);
+            game.localScale = new Vector3(1, 1, 1);  //setting parent overrides scale (sets it to 2.5)
+        }
+        foreach (Transform game in inactiveGames)
+        {
+            game.SetParent(contentPanel.transform);
+            game.localScale = new Vector3(1, 1, 1);
         }
     }
 

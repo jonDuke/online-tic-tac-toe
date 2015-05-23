@@ -9,6 +9,9 @@ public class GameListDisplay : MonoBehaviour {
     {
         nameDisplay.text = "Opponent: " + name;
         turnDisplay.text = (turn) ? "your turn" : "their turn";
+
+        if (turn)
+            GetComponent<Image>().color = new Color(1f, 1, .3f);
     }
 
     public void chooseGame()
