@@ -29,7 +29,7 @@
 		if($gameid != -1)
 		{
 			//get game data
-			$query = "SELECT player1id, player2id, turn FROM Games WHERE gameid = $gameid";
+			$query = "SELECT player1id, player2id, turn, gamestatus FROM Games WHERE gameid = $gameid";
 			$gamedata = mysqli_query($DB_link, $query) or die('ERROR2: ' . mysqli_error($DB_link));
 			if(mysqli_num_rows($gamedata) == 0)
 				die('ERROR: game not found');
@@ -54,7 +54,7 @@
 				$turn = true;
 
 			//game data: gameid, player2name, turn
-			$data[$dataIndex] = array('gameid' => $gameid, 'player2name' => $otherName['name'], 'turn' => $turn);
+			$data[$dataIndex] = array('gameid' => $gameid, 'player2name' => $otherName['name'], 'turn' => $turn, 'status' => $gamedata['gamestatus']);
 			$dataIndex++;
 		}
 	}

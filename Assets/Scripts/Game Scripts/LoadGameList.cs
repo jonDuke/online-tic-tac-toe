@@ -25,10 +25,10 @@ public class LoadGameList : MonoBehaviour {
         {
             GameObject newGame = Instantiate(displayPrefab);
             GameListDisplay display = newGame.GetComponent<GameListDisplay>();
-            display.setDisplay(node[i]["player2name"], node[i]["turn"].AsBool);
+            display.setDisplay(node[i]["player2name"], node[i]["turn"].AsBool, node[i]["status"].AsInt);
             display.gameID = node[i]["gameid"].AsInt;
 
-            if (node[i]["turn"].AsBool)
+            if (node[i]["status"].AsInt == 0 && node[i]["turn"].AsBool)
                 activeGames.Add(newGame.transform);
             else
                 inactiveGames.Add(newGame.transform);

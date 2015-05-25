@@ -47,12 +47,15 @@
 	else if($board[2] != 0 && $board[2] == $board[4] && $board[4] == $board[6])
 		$gameover = true;
 
+	$gamestatus = 0; //default value, changes if game is over
+
 	$moveResult = 'move confirmed';
 	if($gameover)
 	{
 		update_stats($playerID, 1, $DB_link);
 		update_stats(get_other_player($playerID, $gameID, $DB_link), -1, $DB_link);
 		$moveResult = 'win';
+		$gamestatus = $type;
 	}
 
 	$boardFilled = true;
@@ -70,12 +73,13 @@
 		update_stats($playerID, 0, $DB_link);
 		update_stats(get_other_player($playerID, $gameID, $DB_link), 0, $DB_link);
 		$moveResult = 'draw';
+		$gamestatus = 3;
 	}
 
 	$board = json_encode($board);
 	$turn = ($type == 1) ? 2 : 1;
 
-	$query = "UPDATE Games SET turn = $turn, boardstate = \"$board\" WHERE gameid = $gameID";
+	$query = "UPDATE Games SET turn = $turn, gamestatus = $gamestatus, boardstate = \"$board\" WHERE gameid = $gameID";
 	mysqli_query($DB_link, $query) or die('ERROR3: ' . mysqli_error($DB_link));
 
 	echo $moveResult;
